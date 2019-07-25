@@ -18,17 +18,18 @@ const getUserData = () => {
 const setUserData = (data) => {
    const userDataPath = app.getPath('userData');
    const dataPath = join(userDataPath, "data.json");
-   fs.writeFileSync(dataPath, data)
+   fs.writeFileSync(dataPath, JSON.stringify(data));
 }
 
 const reducer = (state, action) => {
-   if (action.type === 'ADD_PROJECT'){
+   if (action.type === 'PROJECT_ADDED'){
       const project = parseProject(action.payload);
       const prevState = getUserData()
       const nextState = {
          ...prevState,
          [project.path]: project
       }
+      console.log('next: ', project);
       setUserData(nextState)
       return nextState
    }

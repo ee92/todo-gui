@@ -1,3 +1,6 @@
+const fs = require('fs');
+const {join} = require('path');
+
 const ignore = ['node_modules', 'build', '.git', '.DS_Store']
 const regex = [
    {  
@@ -27,8 +30,7 @@ const parseFile = (path, todos) => {
       const comments = text.match(expression.comment) || []
       comments.map(comment => {
          const matches = comment.match(expression.todo) || []
-         const items = matches.map(text => ({path, text}))
-         todos = todos.concat(items)
+         matches.forEach(text => todos.push({path, text}))
       })
    })
 }
