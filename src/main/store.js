@@ -1,36 +1,43 @@
 const {app} = require('electron');
-const path = require('path');
 const fs = require('fs');
+const {join} = require('path');
 
 const parseProject = require('./parser.js');
+
+const getUserData = () => {
+   try {
+      const userDataPath = app.getPath('userData');
+      const dataPath = join(userDataPath, "data.json");
+      const data = JSON.parse(fs.readFileSync(dataPath));
+      return data;
+   } catch(err) {
+      return {};
+   };
+}
+
+const setUserData = (data) => {
+   const userDataPath = app.getPath('userData');
+   const dataPath = join(userDataPath, "data.json");
+   fs.writeFileSync(dataPath, data)
+}
 
 const reducer = (state, action) => {
    if (action.type === 'ADD_PROJECT'){
       const project = parseProject(action.payload);
-      return {
-         ...state,
+      const prevState = getUserData()
+      const nextState = {
+         ...prevState,
          [project.path]: project
       }
+      setUserData(nextState)
+      return nextState
    }
    return state
 }
 
 const createStore = () => {
-   let state = initialState();
    let listeners = [];
-   
-   const initialState = () => {
-      try {
-         const userDataPath = app.getPath('userData');
-         const dataPath = path(userDataPath, "data.json");
-         const data = JSON.parse(fs.readFileSync(dataPath));
-         return data;
-         
-      } catch(err) {
-         console.log(err);
-         return {};
-      };
-   };
+   let state = getUserData()
 
    const getState = () => {
       return state;

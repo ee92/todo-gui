@@ -1,11 +1,12 @@
-const { app, BrowserWindow } = require('electron');
-const createStore = require('store');
+const { app, BrowserWindow, ipcMain } = require('electron');
+const createStore = require('./store.js');
 
-const store = createStore();
+let store;
 
 let mainWindow;
 
 const createWindow = () => {
+	store = createStore();
 	mainWindow = new BrowserWindow({
 		width: 800,
 		height: 600,
@@ -28,3 +29,7 @@ app.on('window-all-closed', () => {
 app.on('activate', () => {
 	if (mainWindow === null) createWindow();
 });
+
+ipcMain.on('PROJECT_ADDED', (project) => {
+	store.dispatch({type: 'PROJECT_ADDED', payload: project})
+})

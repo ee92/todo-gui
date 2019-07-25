@@ -1,3 +1,4 @@
+const {ipcRenderer} = require('electron');
 const createState = require('./state.js');
 
 const renderProjects = (projects) => {
@@ -43,10 +44,11 @@ const init = () => {
       renderTodos(ref.val());
    });
 
-   document.getElementById('file-picker').addEventListener(
-      'change',
-      projectSelected
-   );
+   document.getElementById('file-picker').addEventListener('change', (e) => {
+      const project = e.target.files[0];
+      if (!project) return;
+      ipcRenderer.send('PROJECT_ADDED', file);
+   });
 
    document.getElementById('add-project').addEventListener('click', () => {
       document.getElementById('file-picker').click();
