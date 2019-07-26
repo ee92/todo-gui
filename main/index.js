@@ -14,7 +14,7 @@ const createWindow = () => {
 		}
 	});
 
-	mainWindow.loadFile('index.html');
+	mainWindow.loadFile('build/index.html');
 	mainWindow.webContents.openDevTools();
 	mainWindow.on('closed', () => mainWindow = null);
 	mainWindow.webContents.once('dom-ready', () => {
@@ -33,6 +33,13 @@ app.on('window-all-closed', () => {
 
 app.on('activate', () => {
 	if (mainWindow === null) createWindow();
+});
+
+ipcMain.on('UPDATE_PROJECT', (_, project) => {
+	store.dispatch({
+		type: 'PROJECT_ADDED',
+		payload: project
+	});
 });
 
 ipcMain.on('SHOW_FILE_PICKER', () => {

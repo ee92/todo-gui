@@ -29,7 +29,6 @@ const reducer = (state, action) => {
          ...prevState,
          [project.path]: project
       }
-      console.log('next: ', project);
       setUserData(nextState)
       return nextState
    }

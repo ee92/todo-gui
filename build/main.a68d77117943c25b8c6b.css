@@ -1,0 +1,55 @@
+body {
+   margin: 0px;
+   font-family: sans-serif;
+   font-weight: 100;
+}
+
+.App__root--3-5HS {
+   display: flex;
+}
+
+.App__sidebarHeader--yrDm3 {
+   font-size: 22px;
+   padding: 10px;
+}
+
+.App__projects--3TAPv {
+   height: 100vh;
+   background: rgb(58, 58, 58);
+   box-shadow: rgba(0,0,0,0.15) 1px 0px 2px;
+   color: white;
+}
+
+.App__project--3Xthi {
+   padding: 10px;
+   background-color: transparent;
+   transition: 0.3ms;
+}
+
+.App__project--3Xthi:hover {
+   background-color: rgba(255, 255, 255, 0.1);
+}
+
+.App__addProject--1SrR1 {
+   border: none;
+   border-radius: 3px;
+   margin: 10px;
+   padding: 10px;
+   background-color: rgb(19, 100, 221);
+   color: white;
+}
+
+.App__todos--2H2xc {
+   width: 100%;
+   min-height: 100vh;
+   background: rgb(168, 168, 168);
+   color: white;
+}
+
+.App__todo--62NwT {
+   padding: 10px;
+   margin: 10px;
+   box-shadow: rgba(0,0,0,0.15) 0px 1px 2px;
+   background-color: wheat;
+   color: black;
+}

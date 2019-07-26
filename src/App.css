@@ -1,0 +1,55 @@
+body {
+   margin: 0px;
+   font-family: sans-serif;
+   font-weight: 100;
+}
+
+.root {
+   display: flex;
+}
+
+.sidebarHeader {
+   font-size: 22px;
+   padding: 10px;
+}
+
+.projects {
+   height: 100vh;
+   background: rgb(58, 58, 58);
+   box-shadow: rgba(0,0,0,0.15) 1px 0px 2px;
+   color: white;
+}
+
+.project {
+   padding: 10px;
+   background-color: transparent;
+   transition: 0.3ms;
+}
+
+.project:hover {
+   background-color: rgba(255, 255, 255, 0.1);
+}
+
+.addProject {
+   border: none;
+   border-radius: 3px;
+   margin: 10px;
+   padding: 10px;
+   background-color: rgb(19, 100, 221);
+   color: white;
+}
+
+.todos {
+   width: 100%;
+   min-height: 100vh;
+   background: rgb(168, 168, 168);
+   color: white;
+}
+
+.todo {
+   padding: 10px;
+   margin: 10px;
+   box-shadow: rgba(0,0,0,0.15) 0px 1px 2px;
+   background-color: wheat;
+   color: black;
+}
