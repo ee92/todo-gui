@@ -4,33 +4,33 @@ body {
    font-weight: 100;
 }
 
-.App__root--3-5HS {
+.App__root--vE5q1 {
    display: flex;
 }
 
-.App__sidebarHeader--yrDm3 {
+.App__sidebarHeader--37kyG {
    font-size: 22px;
    padding: 10px;
 }
 
-.App__projects--3TAPv {
+.App__projects--2TQwN {
    height: 100vh;
    background: rgb(58, 58, 58);
    box-shadow: rgba(0,0,0,0.15) 1px 0px 2px;
    color: white;
 }
 
-.App__project--3Xthi {
+.App__project--8Po-L {
    padding: 10px;
    background-color: transparent;
    transition: 0.3ms;
 }
 
-.App__project--3Xthi:hover {
+.App__project--8Po-L:hover {
    background-color: rgba(255, 255, 255, 0.1);
 }
 
-.App__addProject--1SrR1 {
+.App__addProject--2aM_E {
    border: none;
    border-radius: 3px;
    margin: 10px;
@@ -39,14 +39,14 @@ body {
    color: white;
 }
 
-.App__todos--2H2xc {
+.App__todos--20hDb {
    width: 100%;
    min-height: 100vh;
    background: rgb(168, 168, 168);
    color: white;
 }
 
-.App__todo--62NwT {
+.App__todo--1dTQo {
    padding: 10px;
    margin: 10px;
    box-shadow: rgba(0,0,0,0.15) 0px 1px 2px;

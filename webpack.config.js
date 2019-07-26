@@ -5,20 +5,32 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const devMode = process.env.NODE_ENV === 'development'
 
-module.exports = {
+module.exports = [{
   mode: 'production',
-  entry: './src/index.js',
+  target: 'electron-main',
+  entry: './main/index.js',
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'build')
-  },
-  externals: {
-    electron: 'require("electron")'
+    path: path.resolve(__dirname, 'build', 'main')
   },
   module: {
     rules: [{
       test:/\.js$/,
-      exclude: /node_modules/,
+      use: 'babel-loader'
+    }]
+  }
+}, 
+{
+  mode: 'production',
+  target: 'electron-renderer',
+  entry: './render/index.js',
+  output: {
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'build', 'render')
+  },
+  module: {
+    rules: [{
+      test:/\.js$/,
       use: 'babel-loader'
     },
     {
@@ -39,11 +51,11 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      template: './src/index.html'
+      template: './render/index.html'
     }),
     new MiniCssExtractPlugin({
       filename: devMode ? '[name].css' : '[name].[hash].css',
       chunkFilename: devMode ? '[id].css' : '[id].[hash].css'
     })
   ]
-};
+}];

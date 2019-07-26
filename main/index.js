@@ -11,10 +11,10 @@ const createWindow = () => {
 		height: 600,
 		webPreferences: {
 			nodeIntegration: true
-		}
+	   }
 	});
 
-	mainWindow.loadFile('build/index.html');
+	mainWindow.loadFile('build/render/index.html');
 	mainWindow.webContents.openDevTools();
 	mainWindow.on('closed', () => mainWindow = null);
 	mainWindow.webContents.once('dom-ready', () => {
