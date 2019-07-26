@@ -1,5 +1,5 @@
-const fs = require('fs');
-const {join} = require('path');
+import {readFileSync, readdirSync, statSync} from 'fs';
+import {join} from 'path';
 
 const ignore = ['node_modules', 'build', '.git', '.DS_Store']
 const regex = [
@@ -25,7 +25,7 @@ const cleanTodos = (todos) => {
 }
 
 const parseFile = (path, todos) => {
-   const text = fs.readFileSync(path, 'utf-8');
+   const text = readFileSync(path, 'utf-8');
    regex.forEach(expression => {
       const comments = text.match(expression.comment) || []
       comments.map(comment => {
@@ -36,11 +36,11 @@ const parseFile = (path, todos) => {
 }
 
 const collectTodos = (path, todos) => {
-   if (fs.statSync(path).isFile()) {
+   if (statSync(path).isFile()) {
       parseFile(path, todos)
    }
-   if (fs.statSync(path).isDirectory()) {
-      const files = fs.readdirSync(path)
+   if (statSync(path).isDirectory()) {
+      const files = readdirSync(path)
       files.forEach(file => {
          if (ignore.includes(file)) return
          const filePath = join(path, file)
@@ -60,4 +60,4 @@ const parseProject = (file) => {
    }
 }
 
-module.exports = parseProject
+export default parseProject

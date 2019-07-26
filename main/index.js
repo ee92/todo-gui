@@ -1,5 +1,5 @@
-const { app, BrowserWindow, ipcMain, dialog } = require('electron');
-const createStore = require('./store.js');
+import { app, BrowserWindow, ipcMain, dialog } from 'electron';
+import createStore from './store.js';
 
 let store = createStore();
 

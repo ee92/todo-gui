@@ -15,5 +15,3 @@ ReactDOM.render(
 // TODO: something else
 
 // TODO one more thing...
-
-// TODO: watch glass

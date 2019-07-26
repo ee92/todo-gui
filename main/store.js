@@ -1,14 +1,13 @@
-const {app} = require('electron');
-const fs = require('fs');
-const {join} = require('path');
-
-const parseProject = require('./parser.js');
+import {app} from 'electron';
+import {readFileSync, writeFileSync} from 'fs';
+import {join} from 'path';
+import parseProject from './parser.js';
 
 const getUserData = () => {
    try {
       const userDataPath = app.getPath('userData');
       const dataPath = join(userDataPath, "data.json");
-      const data = JSON.parse(fs.readFileSync(dataPath));
+      const data = JSON.parse(readFileSync(dataPath));
       return data;
    } catch(err) {
       return {};
@@ -18,7 +17,7 @@ const getUserData = () => {
 const setUserData = (data) => {
    const userDataPath = app.getPath('userData');
    const dataPath = join(userDataPath, "data.json");
-   fs.writeFileSync(dataPath, JSON.stringify(data));
+   writeFileSync(dataPath, JSON.stringify(data));
 }
 
 const reducer = (state, action) => {
@@ -59,4 +58,4 @@ const createStore = () => {
    };
 };
 
-module.exports = createStore;
+export default createStore;
