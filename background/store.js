@@ -1,11 +1,11 @@
-import {app} from 'electron';
+import {remote} from 'electron';
 import {readFileSync, writeFileSync} from 'fs';
 import {join} from 'path';
 import parseProject from './parser.js';
 
 const getUserData = () => {
    try {
-      const userDataPath = app.getPath('userData');
+      const userDataPath = remote.app.getPath('userData');
       const dataPath = join(userDataPath, "data.json");
       const data = JSON.parse(readFileSync(dataPath));
       return data;
@@ -15,7 +15,7 @@ const getUserData = () => {
 }
 
 const setUserData = (data) => {
-   const userDataPath = app.getPath('userData');
+   const userDataPath = remote.app.getPath('userData');
    const dataPath = join(userDataPath, "data.json");
    writeFileSync(dataPath, JSON.stringify(data));
 }

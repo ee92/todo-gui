@@ -1,11 +1,8 @@
 // TODO: watch file system for changes to projects in store
-// TODO: move parsing to render process in hidden BrowserWindow
 import { app, BrowserWindow, ipcMain, dialog } from 'electron';
-import createStore from './store.js';
-
-let store = createStore();
 
 let mainWindow;
+let parserProcess;
 
 const createWindow = () => {
 	mainWindow = new BrowserWindow({
@@ -19,15 +16,25 @@ const createWindow = () => {
 	mainWindow.loadFile('build/render/index.html');
 	mainWindow.webContents.openDevTools();
 	mainWindow.on('closed', () => mainWindow = null);
-	mainWindow.webContents.once('dom-ready', () => {
-		mainWindow.webContents.send('update', store.getState());
-   });
-	store.subscribe(() => {
-		mainWindow.webContents.send('update', store.getState());
+};
+
+const createParserProcess = () => {
+	parserProcess = new BrowserWindow({
+		show: false,
+		webPreferences: {
+			nodeIntegration: true
+		}
+	});
+	parserProcess.loadFile('build/background/index.html')
+	ipcMain.on('background-update', (_, value) => {
+		mainWindow.webContents.send('update', value);
 	});
 };
 
-app.on('ready', createWindow);
+app.on('ready', () => {
+	createWindow()
+	createParserProcess()
+});
 
 app.on('window-all-closed', () => {
 	if (process.platform !== 'darwin') app.quit();
@@ -38,20 +45,14 @@ app.on('activate', () => {
 });
 
 ipcMain.on('UPDATE_PROJECT', (_, project) => {
-	store.dispatch({
-		type: 'PROJECT_ADDED',
-		payload: project
-	});
+	parserProcess.webContents.send('update-project', project);
 });
 
 ipcMain.on('SHOW_FILE_PICKER', () => {
 	dialog.showOpenDialog({properties: ['openDirectory']}, (files) => {
-		if (!files) return
-		const path = files[0]
-		const name = path.split('/').pop()
-		store.dispatch({
-			type: 'PROJECT_ADDED',
-			payload: {name, path}
-		});
+		if (!files) return;
+		const path = files[0];
+		const name = path.split('/').pop();
+		parserProcess.webContents.send('update-project', {name, path});
 	});
 });
