@@ -1,6 +1,6 @@
 .todos {
    width: 100%;
-   background: rgb(128, 128, 128);
+   background: rgb(71, 71, 71);
    color: white;
 }
 
@@ -8,18 +8,23 @@
    padding: 10px;
    margin: 10px;
    box-shadow: rgba(0,0,0,0.15) 0px 1px 2px;
-   background-color: rgb(168, 168, 168);
-   color: black;
+   background-color: rgb(58, 58, 58);
+   color: rgb(255, 255, 255);
    word-break: break-word;
 }
 
 .todoText {
    font-size: 16px;
-
+   padding: 5px;
 }
 
 .todoPath {
    font-size: 12px;
    font-style: italic;
-   color: rgb(36, 36, 36)
+   color: rgb(36, 36, 36);
+   padding: 5px;
+}
+
+.link {
+   color: rgb(163, 163, 163);
 }

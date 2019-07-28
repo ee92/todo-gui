@@ -39,7 +39,7 @@ const Projects = ({projects, setCurrentProject}) => {
       <div className={styles.projects} ref={node => ref = node}>
          <div className={styles.sidebarHeader}>projects</div>
          <button className={styles.addProject} onClick={showFilePicker}>
-            new
+            add project
          </button>
          {projects.map((project, index) => 
             <div

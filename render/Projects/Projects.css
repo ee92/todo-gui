@@ -5,7 +5,7 @@
 
 .projects {
    position: relative;
-   background: rgb(58, 58, 58);
+   background-color: rgb(58, 58, 58);
    box-shadow: rgba(0,0,0,0.15) 1px 0px 2px;
    color: white;
    min-width: 200px;

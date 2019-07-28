@@ -13,10 +13,11 @@ const Todos = ({projects, currentProject}) => {
          {project && project.todos.map(todo =>
             <div key={todo.path + todo.text} className={styles.todo}>
                <div className={styles.todoText}>{todo.text}</div>
-               <div className={styles.todoPath}>{todo.path}</div>
-               <button onClick={() => openFile(todo.path)}>
-                  open
-               </button>
+               <div className={styles.todoPath} onClick={() => openFile(todo.path)}>
+                  <a href="#" className={styles.link}>
+                     {todo.path.split(project.name).pop()}
+                  </a>
+               </div>
             </div>
          )}
       </div>
