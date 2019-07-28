@@ -5,15 +5,15 @@ const ignore = ['node_modules', 'build', '.git', '.DS_Store']
 const regex = [
    {  
       type: 'HTML',
-      comment: /(<!--)(.|\n)+?(-->)/gm,
+      comment: /(<!--)(.|\n){0,200}?(-->)/gm,
       todo: /(?<=(<!--)((.|\n)*?)TODO(:|\s))((?:(?!(-->))(.|\n)*?))*/gm
    }, {
       type: 'JS_LINE',
-      comment: /\/\/\s+.*/g,
+      comment: /\/\/\s+.{0,200}/g,
       todo: /(?<=(\/\/)\s+TODO(:|\s)).*/g
    }, {
       type: 'JS_BLOCK',
-      comment: /(\/\*)(.|\n)+?(\*\/)/gm,
+      comment: /(\/\*)(.|\n){0,200}?(\*\/)/gm,
       todo: /(?<=(\/\*)((.|\n)*?)TODO(:|\s))((?:(?!(\*\/))(.|\n)*?))*/gm
    }
 ]

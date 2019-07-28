@@ -19,7 +19,7 @@ module.exports = [{
       use: 'babel-loader'
     }]
   }
-}, 
+},
 {
   mode: 'production',
   target: 'electron-renderer',

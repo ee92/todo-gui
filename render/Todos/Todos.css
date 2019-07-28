@@ -1,0 +1,25 @@
+.todos {
+   width: 100%;
+   background: rgb(128, 128, 128);
+   color: white;
+}
+
+.todo {
+   padding: 10px;
+   margin: 10px;
+   box-shadow: rgba(0,0,0,0.15) 0px 1px 2px;
+   background-color: rgb(168, 168, 168);
+   color: black;
+   word-break: break-word;
+}
+
+.todoText {
+   font-size: 16px;
+
+}
+
+.todoPath {
+   font-size: 12px;
+   font-style: italic;
+   color: rgb(36, 36, 36)
+}

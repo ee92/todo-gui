@@ -1,3 +1,5 @@
+// TODO: watch file system for changes to projects in store
+// TODO: move parsing to render process in hidden BrowserWindow
 import { app, BrowserWindow, ipcMain, dialog } from 'electron';
 import createStore from './store.js';
 
@@ -43,9 +45,7 @@ ipcMain.on('UPDATE_PROJECT', (_, project) => {
 });
 
 ipcMain.on('SHOW_FILE_PICKER', () => {
-	dialog.showOpenDialog({
-		properties: ['openDirectory'],
-	}, (files) => {
+	dialog.showOpenDialog({properties: ['openDirectory']}, (files) => {
 		if (!files) return
 		const path = files[0]
 		const name = path.split('/').pop()
