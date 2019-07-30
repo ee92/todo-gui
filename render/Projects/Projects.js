@@ -1,14 +1,12 @@
-// TODO: add ability to remove projects
 import React from 'react';
 import {ipcRenderer} from 'electron';
 import styles from './Projects.css';
 
-const Projects = ({projects, setCurrentProject}) => {
+const Projects = ({projects, currentProject, setCurrentProject}) => {
    let ref = null;
    let dragging = false;
 
    const handleMouseMove = (e) => {
-      // TODO: throttle resize event
       if (dragging) {
          ref.style.width = e.clientX + "px";
       }
@@ -26,14 +24,10 @@ const Projects = ({projects, setCurrentProject}) => {
       document.addEventListener('mouseup', handleMouseUp);
    }
    const showFilePicker = () => {
-      ipcRenderer.send('SHOW_FILE_PICKER');
+      ipcRenderer.send('show-file-picker');
    }
-   const selectProject = (project, index) => {
+   const selectProject = (index) => {
       setCurrentProject(index);
-      ipcRenderer.send('UPDATE_PROJECT', {
-         name: project.name,
-         path: project.path
-      })
    }
    return (
       <div className={styles.projects} ref={node => ref = node}>
@@ -45,9 +39,15 @@ const Projects = ({projects, setCurrentProject}) => {
             <div
                key={project.path}
                className={styles.project}
-               onClick={() => selectProject(project, index)}
+               onClick={() => selectProject(index)}
             >
-               {project.name}
+               <span>
+                  {project.name}
+                  <div className={index === currentProject
+                     ? `${styles.projectName} ${styles.currentProject}`
+                     :  styles.projectName
+                  }/>
+               </span>
             </div>
          )}
          <div

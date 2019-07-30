@@ -1,19 +1,29 @@
 import {ipcRenderer} from 'electron';
-import createStore from './store.js';
+import createStore from './store';
+import watch from './watcher';
 
 let store = createStore();
-
-ipcRenderer.send('background-update', store.getState());
+store.dispatch({type: 'INIT'});
 
 store.subscribe(() => {
-   console.log('sending: ', store.getState());
-   ipcRenderer.send('background-update', store.getState());
+   ipcRenderer.send('background-update', store.getState().projects);
 });
 
-ipcRenderer.once('update-project', (_, value) => {
-   console.log('dispatch: ', value);
+ipcRenderer.send('background-update', store.getState().projects);
+
+ipcRenderer.on('watch-project', (_, project) => {
+	console.log('watching: ', project)
+	watch(project.path, () => {
+		store.dispatch({
+			type: 'PROJECT_ADDED',
+			payload: {project}
+		});
+	});
+});
+
+ipcRenderer.on('update-project', (_, project) => {
    store.dispatch({
 		type: 'PROJECT_ADDED',
-		payload: value
+		payload: {project}
 	});
 });

@@ -49,13 +49,13 @@ const collectTodos = (path, todos) => {
    }
 }
 
-const parseProject = (file) => {
+const parseProject = (project) => {
    let todos = []
-   collectTodos(file.path, todos)
+   collectTodos(project.path, todos)
    cleanTodos(todos)
    return {
-      name: file.name,
-      path: file.path,
+      name: project.name,
+      path: project.path,
       todos
    }
 }

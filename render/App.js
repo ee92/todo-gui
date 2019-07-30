@@ -8,17 +8,24 @@ const App = () => {
    const [projects, setProjects] = useState([]);
    const [currentProject, setCurrentProject] = useState(0);
 
-   useEffect(() => {
-      const project = projects[currentProject]
-      if (project) {
-         document.title = project.name
-      }
-   }, [projects, currentProject])
-
    const listenUpdate = (_, store) => {
       const projectList = Object.keys(store).map(key => store[key]);
       setProjects(projectList);
    };
+
+   useEffect(() => {
+      const project = projects[currentProject];
+      if (project) {
+         ipcRenderer.send('watch-project', project);
+      }
+   }, [projects, currentProject]);
+
+   useEffect(() => {
+      const project = projects[currentProject]
+      if (project) {
+         document.title = project.name;
+      }
+   }, [projects, currentProject]);
 
    useEffect(() => {
       ipcRenderer.once('update', listenUpdate);
@@ -29,10 +36,17 @@ const App = () => {
 
    return (
       <div className={styles.root}>
-         <Projects projects={projects} setCurrentProject={setCurrentProject}/>
-         <Todos projects={projects} currentProject={currentProject}/>
+         <Projects
+            projects={projects}
+            currentProject={currentProject}
+            setCurrentProject={setCurrentProject}
+         />
+         <Todos 
+            projects={projects} 
+            currentProject={currentProject}
+         />
       </div>
-   )
+   );
 };
 
 export default App;

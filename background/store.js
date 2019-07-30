@@ -6,7 +6,7 @@ import parseProject from './parser.js';
 const getUserData = () => {
    try {
       const userDataPath = remote.app.getPath('userData');
-      const dataPath = join(userDataPath, "data.json");
+      const dataPath = join(userDataPath, 'data.json');
       const data = JSON.parse(readFileSync(dataPath));
       return data;
    } catch(err) {
@@ -16,27 +16,40 @@ const getUserData = () => {
 
 const setUserData = (data) => {
    const userDataPath = remote.app.getPath('userData');
-   const dataPath = join(userDataPath, "data.json");
+   const dataPath = join(userDataPath, 'data.json');
    writeFileSync(dataPath, JSON.stringify(data));
 }
 
 const reducer = (state, action) => {
-   if (action.type === 'PROJECT_ADDED'){
-      const project = parseProject(action.payload);
-      const prevState = getUserData()
-      const nextState = {
-         ...prevState,
-         [project.path]: project
+   switch(action.type) {
+      case('INIT'): {
+         const projects = getUserData();
+         const nextState = {projects};
+         return nextState;
       }
-      setUserData(nextState)
-      return nextState
+      case('PROJECT_ADDED'): {
+         console.log('reducer: ', action.payload)
+         const project = parseProject(action.payload.project);
+         console.log('parsed: ', project)
+         const nextState = {
+            ...state,
+            projects: {
+               ...state.projects,
+               [project.path]: project,
+            }
+         };
+         setUserData(nextState.projects);
+         return nextState;
+      }
+      default: {
+         return state;
+      }
    }
-   return state
 }
 
 const createStore = () => {
    let listeners = [];
-   let state = getUserData()
+   let state = {};
 
    const getState = () => {
       return state;

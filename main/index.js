@@ -1,4 +1,3 @@
-// TODO: watch file system for changes to projects in store
 import { app, BrowserWindow, ipcMain, dialog } from 'electron';
 
 let mainWindow;
@@ -12,10 +11,12 @@ const createWindow = () => {
 			nodeIntegration: true
 	   }
 	});
-
 	mainWindow.loadFile('build/render/index.html');
-	mainWindow.webContents.openDevTools();
-	mainWindow.on('closed', () => mainWindow = null);
+	// mainWindow.webContents.openDevTools();
+	mainWindow.on('closed', () => {
+		mainWindow = null;
+		parserProcess = null;
+	});
 };
 
 const createParserProcess = () => {
@@ -25,30 +26,33 @@ const createParserProcess = () => {
 			nodeIntegration: true
 		}
 	});
-	parserProcess.loadFile('build/background/index.html')
-	ipcMain.on('background-update', (_, value) => {
-		mainWindow.webContents.send('update', value);
-	});
+	parserProcess.loadFile('build/background/index.html');
 };
 
 app.on('ready', () => {
-	createWindow()
-	createParserProcess()
+	createWindow();
+	createParserProcess();
 });
-
 app.on('window-all-closed', () => {
 	if (process.platform !== 'darwin') app.quit();
 });
-
 app.on('activate', () => {
-	if (mainWindow === null) createWindow();
+	if (mainWindow === null) {
+		createWindow();
+		createParserProcess();
+	}
 });
 
-ipcMain.on('UPDATE_PROJECT', (_, project) => {
-	parserProcess.webContents.send('update-project', project);
+// forward to render 
+ipcMain.on('background-update', (_, projects) => {
+	mainWindow.webContents.send('update', projects);
 });
 
-ipcMain.on('SHOW_FILE_PICKER', () => {
+// forward to background
+ipcMain.on('watch-project', (_, project) => {
+	parserProcess.webContents.send('watch-project', project);
+});
+ipcMain.on('show-file-picker', () => {
 	dialog.showOpenDialog({properties: ['openDirectory']}, (files) => {
 		if (!files) return;
 		const path = files[0];

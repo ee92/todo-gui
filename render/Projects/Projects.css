@@ -24,6 +24,16 @@
    background-color: rgba(255, 255, 255, 0.1);
 }
 
+.projectName {
+   transition: 0.3ms;
+   border-bottom: none;
+   width: 100%;
+}
+
+.currentProject {
+   border-bottom: 1px solid white;
+}
+
 .addProject {
    border: none;
    border-radius: 3px;

@@ -71,6 +71,9 @@ module.exports = [
       filename: 'bundle.js',
       path: path.resolve(__dirname, 'build', 'background')
     },
+    externals: {
+      'fsevents': "require('fsevents')",
+    },
     module: {
       rules: [{
         test:/\.js$/,
