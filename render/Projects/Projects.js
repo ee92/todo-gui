@@ -43,10 +43,7 @@ const Projects = ({projects, currentProject, setCurrentProject}) => {
             >
                <span>
                   {project.name}
-                  <div className={index === currentProject
-                     ? `${styles.projectName} ${styles.currentProject}`
-                     :  styles.projectName
-                  }/>
+                  // TODO: animated under line for selected project
                </span>
             </div>
          )}

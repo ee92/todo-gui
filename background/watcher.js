@@ -11,6 +11,3 @@ const watch = (path, callback) => {
 };
 
 export default watch;
-
-
-// no way!!!!???
