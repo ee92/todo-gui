@@ -29,6 +29,12 @@ const Projects = ({projects, currentProject, setCurrentProject}) => {
    const selectProject = (index) => {
       setCurrentProject(index);
    }
+   const nameStyle = (index) => {
+      if (index === currentProject) {
+         return `${styles.projectName} ${styles.underlined}`
+      }
+      return styles.projectName
+   }
    return (
       <div className={styles.projects} ref={node => ref = node}>
          <div className={styles.sidebarHeader}>projects</div>
@@ -41,9 +47,8 @@ const Projects = ({projects, currentProject, setCurrentProject}) => {
                className={styles.project}
                onClick={() => selectProject(index)}
             >
-               <span>
+               <span className={nameStyle(index)}>
                   {project.name}
-                  // TODO: animated under line for selected project
                </span>
             </div>
          )}

@@ -23,7 +23,12 @@ const Todos = ({projects, currentProject}) => {
    return (
       <div className={styles.todos}>
          {project && project.todos
-            .map(todo => <Todo todo={todo} project={project} key={todo.path + todo.text}/>
+            .map(todo => 
+               <Todo
+                  todo={todo} 
+                  project={project} 
+                  key={todo.path + todo.text}
+               />
          )}
       </div>
    )

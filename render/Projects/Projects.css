@@ -20,18 +20,23 @@
    transition: 0.3ms;
 }
 
-.project:hover {
-   background-color: rgba(255, 255, 255, 0.1);
-}
-
 .projectName {
-   transition: 0.3ms;
-   border-bottom: none;
-   width: 100%;
+   display: inline-block; 
 }
-
-.currentProject {
-   border-bottom: 1px solid white;
+.projectName:after {
+   display: block;
+   content: '';
+   border-bottom: 1px solid white;  
+   transform: scaleX(0);  
+   transition: transform 150ms ease-in-out;
+   transform-origin:  0% 50%;
+   margin: 2px;
+}
+.projectName:hover:after {
+   transform: scaleX(1);
+}
+.projectName.underlined:after {
+   transform: scaleX(1);
 }
 
 .addProject {
