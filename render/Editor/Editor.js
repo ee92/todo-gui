@@ -95,10 +95,7 @@ const Editor = ({todo, setCurrentTodo}) => {
                wrapEnabled={true}
                editorProps={{$blockScrolling: 'Infinity'}}
                value={todoPreview}
-               onChange={(value, event)=> {
-                  console.log(value, event)
-                  setTodoPreview(value)
-               }}
+               onChange={value=> setTodoPreview(value)}
                ref={node => editorRef = node}
             />
          </div>

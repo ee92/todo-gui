@@ -14,6 +14,7 @@ const getUserData = () => {
    };
 }
 
+
 const setUserData = (data) => {
    const userDataPath = remote.app.getPath('userData');
    const dataPath = join(userDataPath, 'data.json');

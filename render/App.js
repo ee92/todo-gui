@@ -1,5 +1,5 @@
 // TODO: make project header with link to project and search bar
-// TODO: add ability to remove projects from sidebar 
+// TODO: add ability to remove projects from sidebar
 import React, {useState, useEffect} from 'react';
 import {ipcRenderer} from 'electron';
 import Editor from './Editor';

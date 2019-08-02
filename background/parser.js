@@ -1,4 +1,4 @@
-// TODO: handle multi line single line comments
+// TODO: handle multi line single line comments please
 import {readFileSync, readdirSync, statSync} from 'fs';
 import {join} from 'path';
 
@@ -18,6 +18,7 @@ const regex = [
       todo: /(?<=(\/\*)((.|\n)*?)TODO(:|\s))((?:(?!(\*\/))(.|\n)*?))*/gm
    }
 ]
+
 
 const cleanTodos = (todos) => {
    todos.forEach(todo => {

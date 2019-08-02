@@ -20,6 +20,7 @@
    padding: 10px;
    background-color: transparent;
    transition: 0.3ms;
+   cursor: pointer;
 }
 
 .projectName {
