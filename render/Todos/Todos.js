@@ -2,23 +2,20 @@ import React from 'react';
 import {shell} from 'electron';
 import styles from './Todos.css';
 
-const Todo = ({todo, project}) => {
-   const openFile = (path) => {
-      shell.openItem(path)
-   }
+const Todo = ({todo, project, setCurrentTodo}) => {
    return (
-      <div className={styles.todo}>
+      <div className={styles.todo} onClick={() => setCurrentTodo(todo)}>
          <div className={styles.todoText}>{todo.text}</div>
-         <div className={styles.todoPath} onClick={() => openFile(todo.path)}>
-            <a href="#" className={styles.link}>
+         <div className={styles.todoPath}>
+            <span className={styles.link}>
                {todo.path.split(project.name).pop()}
-            </a>
+            </span>
          </div>
       </div>
    )
 }
 
-const Todos = ({projects, currentProject}) => {
+const Todos = ({projects, currentProject, setCurrentTodo}) => {
    const project = projects[currentProject];
    return (
       <div className={styles.todos}>
@@ -28,6 +25,7 @@ const Todos = ({projects, currentProject}) => {
                   todo={todo} 
                   project={project} 
                   key={todo.path + todo.text}
+                  setCurrentTodo={setCurrentTodo}
                />
          )}
       </div>

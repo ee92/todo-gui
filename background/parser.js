@@ -1,3 +1,4 @@
+// TODO: handle multi line single line comments
 import {readFileSync, readdirSync, statSync} from 'fs';
 import {join} from 'path';
 

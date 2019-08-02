@@ -1,28 +1,9 @@
 import React from 'react';
 import {ipcRenderer} from 'electron';
 import styles from './Projects.css';
+import CreateNewFolder from '@material-ui/icons/CreateNewFolder'
 
 const Projects = ({projects, currentProject, setCurrentProject}) => {
-   let ref = null;
-   let dragging = false;
-
-   const handleMouseMove = (e) => {
-      if (dragging) {
-         ref.style.width = e.clientX + "px";
-      }
-   }
-   const handleMouseUp = () => {
-      dragging = false;
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseup', handleMouseUp);
-   }
-
-   const handleMouseDown = (e) => {
-      e.preventDefault()
-      dragging = true
-      document.addEventListener('mousemove', handleMouseMove);
-      document.addEventListener('mouseup', handleMouseUp);
-   }
    const showFilePicker = () => {
       ipcRenderer.send('show-file-picker');
    }
@@ -36,11 +17,13 @@ const Projects = ({projects, currentProject, setCurrentProject}) => {
       return styles.projectName
    }
    return (
-      <div className={styles.projects} ref={node => ref = node}>
-         <div className={styles.sidebarHeader}>projects</div>
-         <button className={styles.addProject} onClick={showFilePicker}>
-            add project
-         </button>
+      <div className={styles.projects}>
+         <div className={styles.sidebarHeader}>
+            <span>projects</span>
+            <span className={styles.addProject} onClick={showFilePicker}>
+               <CreateNewFolder/>
+            </span>
+         </div>
          {projects.map((project, index) => 
             <div
                key={project.path}
@@ -52,10 +35,6 @@ const Projects = ({projects, currentProject, setCurrentProject}) => {
                </span>
             </div>
          )}
-         <div
-            className={styles.resizeBar}
-            onMouseDown={handleMouseDown}
-         />
       </div>
    )
 };

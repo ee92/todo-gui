@@ -1,14 +1,16 @@
 .sidebarHeader {
    font-size: 22px;
    padding: 10px;
+   display: flex;
+   justify-content: space-between;
 }
 
 .projects {
    position: relative;
-   background-color: rgb(58, 58, 58);
+   background-color: #2F3129;
    box-shadow: rgba(0,0,0,0.15) 1px 0px 2px;
    color: white;
-   min-width: 200px;
+   min-width: 160px;
    display: flex;
    flex-direction: column;
    flex: none;
@@ -40,12 +42,11 @@
 }
 
 .addProject {
-   border: none;
-   border-radius: 3px;
-   margin: 10px;
-   padding: 10px;
-   background-color: rgb(19, 100, 221);
-   color: white;
+   transform: scale(0.8);
+}
+.addProject:hover {
+   transform: scale(1);
+   transition: 150ms;
 }
 
 .resizeBar {

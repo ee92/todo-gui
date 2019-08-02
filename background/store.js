@@ -28,9 +28,7 @@ const reducer = (state, action) => {
          return nextState;
       }
       case('PROJECT_ADDED'): {
-         console.log('reducer: ', action.payload)
          const project = parseProject(action.payload.project);
-         console.log('parsed: ', project)
          const nextState = {
             ...state,
             projects: {

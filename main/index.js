@@ -7,7 +7,7 @@ const createWindow = () => {
 	mainWindow = new BrowserWindow({
 		width: 800,
 		height: 600,
-		backgroundColor: '#474747',
+		backgroundColor: '#272822',
 		webPreferences: {
 			nodeIntegration: true
 	   }
@@ -16,7 +16,7 @@ const createWindow = () => {
 	// mainWindow.webContents.openDevTools();
 	mainWindow.on('closed', () => {
 		mainWindow = null;
-		parserProcess = null;
+		parserProcess.close()
 	});
 };
 
@@ -44,7 +44,7 @@ app.on('activate', () => {
 	}
 });
 
-// forward to render 
+// forward to render
 ipcMain.on('background-update', (_, projects) => {
 	mainWindow.webContents.send('update', projects);
 });

@@ -12,7 +12,10 @@ store.subscribe(() => {
 ipcRenderer.send('background-update', store.getState().projects);
 
 ipcRenderer.on('watch-project', (_, project) => {
-	console.log('watching: ', project)
+	store.dispatch({
+		type: 'PROJECT_ADDED',
+		payload: {project}
+	});
 	watch(project.path, () => {
 		store.dispatch({
 			type: 'PROJECT_ADDED',
@@ -27,3 +30,4 @@ ipcRenderer.on('update-project', (_, project) => {
 		payload: {project}
 	});
 });
+

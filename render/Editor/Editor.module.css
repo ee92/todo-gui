@@ -1,0 +1,45 @@
+.root {
+   display: flex;
+   flex-direction: column;
+   box-shadow: rgba(0,0,0,0.15) -1px 0px 2px;
+}
+
+.controls {
+   background-color: #2F3129;
+   display: flex;
+   justify-content: flex-end;
+   height: 40px;
+}
+
+.path {
+   background-color: #2F3129;
+}
+
+.editor {
+   position: relative;
+   display: flex;
+   flex: none;
+   height: calc(100vh - 40px);
+}
+
+.resize {
+   width: 8px;
+   cursor: ew-resize;
+   position: absolute;
+   top: 0px;
+   left: -8px;
+   bottom: 0px;
+}
+
+.close {
+   border: none;
+   padding: 10px;
+   background-color: transparent;
+   color: white;
+   opacity: .3;
+   transition: 150ms;
+}
+
+.close:hover {
+   opacity: 1
+}
