@@ -1,4 +1,5 @@
 import { app, BrowserWindow, ipcMain, dialog } from 'electron';
+import { sep } from 'path';
 
 let mainWindow;
 let parserProcess;
@@ -13,7 +14,6 @@ const createWindow = () => {
 	   }
 	});
 	mainWindow.loadFile('build/render/index.html');
-	// mainWindow.webContents.openDevTools();
 	mainWindow.on('closed', () => {
 		mainWindow = null;
 		parserProcess.close()
@@ -57,7 +57,7 @@ ipcMain.on('show-file-picker', () => {
 	dialog.showOpenDialog({properties: ['openDirectory']}, (files) => {
 		if (!files) return;
 		const path = files[0];
-		const name = path.split('/').pop();
+		const name = path.split(sep).pop();
 		parserProcess.webContents.send('update-project', {name, path});
 	});
 });

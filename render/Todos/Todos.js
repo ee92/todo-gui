@@ -1,5 +1,4 @@
 import React from 'react';
-import {shell} from 'electron';
 import styles from './Todos.css';
 
 const Todo = ({todo, project, setCurrentTodo}) => {
