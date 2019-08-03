@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
     "build": "webpack",
-    "watch": "webpack --watch --mode=development"
+    "watch": "webpack --watch --mode=development",
+    "dist": "electron-packager . --overwrite --platform=darwin --arch=x64 --prune=true --out=dist --darwinDarkModeSupport=true --ignore=^main --ignore=^demo --ignore=^render --ignore=^background --ignore=.gitignore --ignore=webpack.config.js --ignore=.babelrc --ignore=package-lock.json --ignore=README.md --ignore=yarn.lock"
   },
   "author": "",
   "license": "ISC",
@@ -28,7 +29,6 @@
     "mini-css-extract-plugin": "^0.8.0",
     "react": "^16.8.6",
     "react-ace": "^7.0.2",
-    "react-beautiful-dnd": "^11.0.5",
     "react-dom": "^16.8.6",
     "style-loader": "^0.23.1",
     "webpack": "^4.37.0",
