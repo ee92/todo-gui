@@ -8,10 +8,10 @@
     "start": "electron .",
     "build": "webpack",
     "watch": "webpack --watch --mode=development",
-    "dist": "electron-packager . --overwrite --platform=darwin --arch=x64 --prune=true --out=dist --darwinDarkModeSupport=true --ignore=^main --ignore=^demo --ignore=^render --ignore=^background --ignore=.gitignore --ignore=webpack.config.js --ignore=.babelrc --ignore=package-lock.json --ignore=README.md --ignore=yarn.lock"
+    "dist": "electron-packager . --overwrite --platform=darwin --arch=x64 --prune=true --out=dist --darwinDarkModeSupport=true --ignore=^main --ignore=^demo --ignore=^render --ignore=^background --ignore=.gitignore --ignore=webpack.config.js --ignore=.babelrc --ignore=package-lock.json --ignore=README.md --ignore=LICENSE.md --ignore=yarn.lock"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Egor Egorov",
+  "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
