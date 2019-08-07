@@ -27,12 +27,15 @@ const Editor = ({todo, setCurrentTodo}) => {
       if (!todo) return;
       const text = fs.readFileSync(todo.path, "utf8");
       setTodoPreview(text);
-      editorRef.editor.gotoLine(todo.line)
    }, [todo]);
 
    useEffect(() => {
       editorRef.editor.resize();
-   }, [width])
+   }, [width]);
+
+   useEffect(() => {
+      editorRef.editor.gotoLine(todo.line);
+   }, [todo, todoPreview]);
 
    const handleMouseMove = (e) => {
       if (resizing === true) {
