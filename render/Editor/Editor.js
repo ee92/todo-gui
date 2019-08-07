@@ -27,6 +27,7 @@ const Editor = ({todo, setCurrentTodo}) => {
       if (!todo) return;
       const text = fs.readFileSync(todo.path, "utf8");
       setTodoPreview(text);
+      editorRef.editor.gotoLine(todo.line)
    }, [todo]);
 
    useEffect(() => {
